@@ -1,0 +1,42 @@
+@model BookModel
+
+<div class="row">
+        <input type="hidden" asp-for="Id">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="@Model.Title"></label>
+                <input asp-for="@Model.Title" class="form-control" />
+                <span asp-validation-for="@Model.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Author"></label>
+                <input asp-for="@Model.Author" class="form-control" />
+                <span asp-validation-for="@Model.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Publisher"></label>
+                <input asp-for="@Model.Publisher" class="form-control" />
+                <span asp-validation-for="@Model.Publisher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.PublishYear"></label>
+                <input asp-for="@Model.PublishYear" class="form-control" />
+                <span asp-validation-for="@Model.PublishYear" class="text-danger"></span>                   
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="@Model.Description"></label>
+                <textarea style="height: 195px;" asp-for="@Model.Description" class="form-control" cols="30" rows="7"></textarea>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>                   
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.DataFile"></label>
+                <input class="form-control" type="file" name="file" id="">
+                <span asp-validation-for="@Model.DataFile" class="text-danger"></span>                   
+            </div>
+        </div>
+    </div>
+    <hr>
+    <input type="submit" class="btn btn-outline-info">
+    <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>

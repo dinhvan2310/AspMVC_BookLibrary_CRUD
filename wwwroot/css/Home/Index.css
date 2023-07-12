@@ -1,0 +1,21 @@
+.headerText
+{
+    font-weight: 400;
+}
+
+.control
+{
+    display: flex;
+    
+}
+
+.createGroup
+{
+    flex-grow: 1;
+}
+
+.searchGroup
+{
+    display: flex;
+    flex-grow: 1;
+}

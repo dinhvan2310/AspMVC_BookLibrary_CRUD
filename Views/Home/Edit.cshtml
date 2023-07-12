@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Edit";
+}
+@model BookModel
+<h6 style="font-weight: 400;" class="display-6">You're editing: @Model.Title</h6>
+<hr>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @{
+        await Html.RenderPartialAsync("_InputBook", Model);
+    }
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    .form-group
+    {
+        margin-bottom: 1rem;
+    }
+</style>

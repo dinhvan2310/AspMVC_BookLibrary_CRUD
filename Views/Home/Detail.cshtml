@@ -1,0 +1,26 @@
+@model BookModel
+
+<head>
+    <link rel="stylesheet" href="~/css/Home/Detail.css">
+</head>
+
+<h6 class="display-6 headerText">@Model.Title</h6>
+<hr>
+
+@{
+    await Html.RenderPartialAsync("_ViewBook", Model);
+}
+
+<a class="btn btn-outline-warning" asp-action="Edit" asp-route-id=@Model.Id>Edit</a>
+<a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@Model.Id>Delete</a>
+@{
+    if(String.IsNullOrEmpty(Model.DataFile))
+    {
+        <a class="btn btn-dark disabled">Dowload</a>
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" asp-action="Dowload" asp-route-id=@Model.Id>Dowload</a>
+    }
+}
+<a class="btn btn-outline-dark" asp-action="Index">Back to list</a>
