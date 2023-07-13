@@ -15,11 +15,12 @@
     <form method="get" class="searchGroup" asp-action="Index">
         @if (ViewData["searchString"] == null)
         {
-            <input type="text" class="form-control" name="searchString" id=""placeholder="Search For">
+            <input type="text" class="form-control" name="searchString" id="" placeholder="Search For">
         }
         else
         {
-            <input type="text" class="form-control" name="searchString" id=""placeholder="Search For" value=@ViewData["searchString"]>
+            <input type="text" class="form-control" name="searchString" id="" placeholder="Search For"
+                value=@ViewData["searchString"]>
         }
         <button type="submit" class="btn btn-outline-dark">Search</button>
     </form>
@@ -28,11 +29,84 @@
 <table class="table table-hover table-striped">
     <thead>
         <tr class="text-primary">
-            <th><a class="text-decoration-none" asp-action="Index" asp-route-page=@ViewData["page"] asp-route-isDes=@ViewData["Id"] asp-route-orderName="Id">@Html.DisplayNameFor(m => m.First().Id)</a></th>
-            <th><a class="text-decoration-none" asp-action="Index" asp-route-page=@ViewData["page"] asp-route-orderName="Title" asp-route-isDes=@ViewData["TieuDe"]>@Html.DisplayNameFor(m => m.First().Title)</a></th>
-            <th><a class="text-decoration-none" asp-action="Index" asp-route-page=@ViewData["page"] asp-route-isDes=@ViewData["Author"] asp-route-orderName="Author">@Html.DisplayNameFor(m => m.First().Author)</a></th>
-            <th><a class="text-decoration-none" asp-route-page=@ViewData["page"] asp-route-isDes=@ViewData["Publisher"] asp-route-orderName="Publisher">@Html.DisplayNameFor(m => m.First().Publisher)</a></th>
-            <th><a class="text-decoration-none" asp-route-page=@ViewData["page"] asp-route-isDes=@ViewData["PublishYear"] asp-route-orderName="PublishYear">@Html.DisplayNameFor(m => m.First().PublishYear)</a></th>
+            <th>
+                <a class="text-decoration-none" asp-action="Index" asp-route-page=@ViewData["page"]
+                    asp-route-isDes=@ViewData["Id"] asp-route-orderName="Id">
+                    @Html.DisplayNameFor(m => m.First().Id)
+                    @if(ViewData["orderName"].ToString() == "Id")
+                    {
+                        @if ((bool)ViewData["Id"] == false)
+                        {
+                            <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-arrow-up-short-wide"></i>
+                        }
+                    }
+                </a>
+            </th>
+            <th>
+                <a class="text-decoration-none" asp-action="Index" asp-route-page=@ViewData["page"]
+                    asp-route-orderName="Title" asp-route-isDes=@ViewData["TieuDe"]>
+                    @Html.DisplayNameFor(m =>m.First().Title)
+                    @if(ViewData["orderName"].ToString() == "Title")
+                    {
+                        @if ((bool)ViewData["TieuDe"] == false)
+                        {
+                            <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-arrow-up-short-wide"></i>
+                        }
+                    }
+                </a>
+            </th>
+            <th><a class="text-decoration-none" asp-action="Index" asp-route-page=@ViewData["page"]
+                    asp-route-isDes=@ViewData["Author"] asp-route-orderName="Author">
+                    @Html.DisplayNameFor(m =>m.First().Author)
+                    @if(ViewData["orderName"].ToString() == "Author")
+                    {
+                        @if ((bool)ViewData["Author"] == false)
+                        {
+                            <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-arrow-up-short-wide"></i>
+                        }
+                    }
+                    </a></th>
+            <th><a class="text-decoration-none" asp-route-page=@ViewData["page"] asp-route-isDes=@ViewData["Publisher"]
+                    asp-route-orderName="Publisher">@Html.DisplayNameFor(m => m.First().Publisher)
+                    @if(ViewData["orderName"].ToString() == "Publisher")
+                    {
+                        @if ((bool)ViewData["Publisher"] == false)
+                        {
+                            <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-arrow-up-short-wide"></i>
+                        }
+                    }
+                    </a></th>
+            <th><a class="text-decoration-none" asp-route-page=@ViewData["page"]
+                    asp-route-isDes=@ViewData["PublishYear"] asp-route-orderName="PublishYear">@Html.DisplayNameFor(m =>
+                    m.First().PublishYear)
+                    @if(ViewData["orderName"].ToString() == "PublishYear")
+                    {
+                        @if ((bool)ViewData["PublishYear"] == false)
+                        {
+                            <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-arrow-up-short-wide"></i>
+                        }
+                    }
+                    </a></th>
             <th></th>
             <th></th>
             <th></th>
@@ -48,11 +122,12 @@
                 <td>@item.Author</td>
                 <td>@item.Publisher</td>
                 <td>@item.PublishYear</td>
-                <td><a class="btn btn-outline-info" asp-controller="" asp-action="Detail" asp-route-id=@item.Id>Detail</a></td>
+                <td><a class="btn btn-outline-info" asp-controller="" asp-action="Detail" asp-route-id=@item.Id>Detail</a>
+                </td>
                 <td><a class="btn btn-outline-warning" asp-action="Edit" asp-route-id=@item.Id>Edit</a></td>
                 <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@item.Id>Delete</a></td>
                 @{
-                    if(String.IsNullOrEmpty(item.DataFile))
+                    if (String.IsNullOrEmpty(item.DataFile))
                     {
                         <td><a class="btn btn-dark disabled" href="#">Dowload</a></td>
                     }
@@ -69,55 +144,58 @@
 <p>Tổng số: <strong>@Model.Count</strong></p>
 
 <nav aria-label="Page navigation">
-  <ul class="pagination">
-    @if((int)ViewData["page"] == 1)
-    {
-        <li class="page-item disabled">
-            <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] - 1) aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-    }
-    else
-    {
-        <li class="page-item">
-            <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] - 1) aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-    }
-    
-    @{
-        for(int i = 1; i <= (int)ViewData["pages"]; i++)
+    <ul class="pagination">
+        @if ((int)ViewData["page"] == 1)
         {
-            if(i == (int)ViewData["page"])
+            <li class="page-item disabled">
+                <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] - 1) aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] - 1) aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+
+        @{
+            for (int i = 1; i <= (int)ViewData["pages"]; i++)
             {
-                <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-page=@i>@i</a></li>
-            }
-            else
-            {
-                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page=@i>@i</a></li>
+                if (i == (int)ViewData["page"])
+                {
+                    <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-page=@i>@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page=@i>@i</a></li>
+                }
             }
         }
-    }
-    
-    @if((int)ViewData["pages"] == (int)ViewData["page"])
-    {
-        <li class="page-item disabled">
-            <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] + 1) aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    }
-    else
-    {
-        <li class="page-item">
-            <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] + 1) aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    }
-  </ul>
+
+        @if ((int)ViewData["pages"] == (int)ViewData["page"])
+        {
+            <li class="page-item disabled">
+                <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] + 1) aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-page=@((int)ViewData["page"] + 1) aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
 </nav>
 
 
+@section Scripts{
+    <script src="https://kit.fontawesome.com/4d56e47221.js" crossorigin="anonymous"></script>
+}

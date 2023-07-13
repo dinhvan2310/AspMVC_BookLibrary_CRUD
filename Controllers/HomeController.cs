@@ -46,6 +46,7 @@ public class HomeController : Controller
             var model = _service.page(_service.getListBook(searchString).ToList(), page, orderName, isDes);
             ViewData["page"] = model.Item3;
             ViewData["pages"] = model.Item2;
+            ViewData["orderName"] = orderName;
             return View(model.Item1);
         }
         else
@@ -54,6 +55,7 @@ public class HomeController : Controller
             var model = _service.page(_service.getListBook().ToList(), page, orderName, isDes);
             ViewData["page"] = model.Item3;
             ViewData["pages"] = model.Item2;
+            ViewData["orderName"] = orderName;
             return View(model.Item1);
         }
     }
