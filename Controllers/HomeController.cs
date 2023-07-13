@@ -120,6 +120,7 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
+            book.DataFile = _service.getBook(book.Id).DataFile;
             _service.upLoadBook(book, file);
             _service.updateBook(book);
             return RedirectToAction("Index");

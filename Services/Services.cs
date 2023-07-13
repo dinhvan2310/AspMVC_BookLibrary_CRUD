@@ -33,6 +33,14 @@ public class Services
         {
             return false;
         }
+        if(temp.DataFile != null)
+        {
+            string path = "Data\\" + temp.DataFile;
+            if(File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
         _context.BookModels.Remove(temp);
         _context.SaveChanges();
         return true;
@@ -53,9 +61,16 @@ public class Services
             Directory.CreateDirectory("Data");
         }
         string path = "Data\\" + file.FileName;
-        _logger.LogWarning(path);
         using var fileStream = new FileStream(path, FileMode.Create);
         file.CopyTo(fileStream);
+        if(!String.IsNullOrEmpty(book.DataFile))
+        {
+            string pathFileRemove = "Data\\" + book.DataFile;
+            if(File.Exists(pathFileRemove))
+            {
+                File.Delete(pathFileRemove);
+            }
+        }
         book.DataFile = file.FileName;
     }
 
