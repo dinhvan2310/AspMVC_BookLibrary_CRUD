@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-ServerVersion serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
-builder.Services.AddDbContext<Context>(options => {
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion);
-});
+// ServerVersion serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
+// builder.Services.AddDbContext<Context>(options => {
+//     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion);
+// });
 
-// builder.Services.AddDbContext<Context>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+builder.Services.AddDbContext<Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 
 builder.Services.AddTransient<Services>();
